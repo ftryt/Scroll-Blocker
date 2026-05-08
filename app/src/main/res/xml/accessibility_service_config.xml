@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged|typeViewClicked"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagDefault|flagIncludeNotImportantViews|flagRetrieveInteractiveWindows|flagReportViewIds"
+    android:canRetrieveWindowContent="true"
+    android:canPerformGestures="true"
+    android:notificationTimeout="50" />
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:accessibilityEventTypes="typeAllMask"-->
+<!--    android:accessibilityFeedbackType="feedbackGeneric|feedbackSpoken"-->
+<!--    android:accessibilityFlags="flagDefault|flagIncludeNotImportantViews|flagRetrieveInteractiveWindows"-->
+<!--    android:canRetrieveWindowContent="true"-->
+<!--    android:notificationTimeout="100"-->
+<!--    android:packageNames="" />-->
+
+<!--<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:description="@string/accessibility_service_description"-->
+<!--    android:accessibilityEventTypes="typeAllMask"-->
+<!--    android:accessibilityFlags="flagDefault|flagRequestFingerprintGestures|flagRequestAccessibilityButton"-->
+<!--    android:accessibilityFeedbackType="feedbackSpoken"-->
+<!--    android:notificationTimeout="100"-->
+<!--    android:canRetrieveWindowContent="true"-->
+<!--    android:canPerformGestures="true" />-->
+<!--    android:settingsActivity="com.example.android.apis.accessibility.ServiceSettingsActivity"-->

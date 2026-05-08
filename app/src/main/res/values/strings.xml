@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Scroll Blocker</string>
+    <string name="accessibility_service_description">Reduces distraction by blocking short-form feeds, while preserving the videos shared by your friends.</string>
+    <string name="accessibility_service_label">Scroll Blocker</string>
+</resources>
