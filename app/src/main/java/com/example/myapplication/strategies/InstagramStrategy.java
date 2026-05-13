@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.strategies;
 
 import android.accessibilityservice.AccessibilityService;
 import android.util.Log;

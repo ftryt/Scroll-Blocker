@@ -5,6 +5,10 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.example.myapplication.strategies.BlockerStrategy;
+import com.example.myapplication.strategies.InstagramStrategy;
+import com.example.myapplication.strategies.YouTubeStrategy;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +27,7 @@ public class MyAccessibilityService extends AccessibilityService {
 
         // Registering strategies
         strategies.put("com.instagram.android", new InstagramStrategy());
-        // Сюди потім додаси YouTubeStrategy
+        strategies.put("com.google.android.youtube", new YouTubeStrategy());
 
         Log.d("Blocker", "Service Connected");
     }
@@ -34,6 +38,7 @@ public class MyAccessibilityService extends AccessibilityService {
 
         SharedPreferences prefs = getSharedPreferences("BlockerPrefs", MODE_PRIVATE);
 
+        // Instagram
         if (packageName.equals("com.instagram.android")) {
             boolean isEnabled = prefs.getBoolean("block_instagram", false);
             if (isEnabled) {
@@ -43,6 +48,19 @@ public class MyAccessibilityService extends AccessibilityService {
                 }
             }
         }
+
+        // YouTube
+        if (packageName.equals("com.google.android.youtube")) {
+            boolean isEnabled = prefs.getBoolean("block_youtube", false);
+            if (isEnabled) {
+                BlockerStrategy strategy = strategies.get(packageName);
+                if (strategy != null) {
+                    strategy.execute(event, this);
+                }
+            }
+        }
+
+        // TikTok
     }
 
     @Override

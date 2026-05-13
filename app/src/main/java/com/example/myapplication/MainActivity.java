@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView statusText;
     private Button btnGrantPermission;
     private CheckBox checkInstagram;
+    private CheckBox checkYouTube;
     private SharedPreferences prefs;
 
     @Override
@@ -34,8 +35,10 @@ public class MainActivity extends AppCompatActivity {
         statusText = findViewById(R.id.statusText);
         btnGrantPermission = findViewById(R.id.btnGrantPermission);
         checkInstagram = findViewById(R.id.checkInstagram);
+        checkYouTube = findViewById(R.id.checkYouTube);
 
         checkInstagram.setChecked(prefs.getBoolean("block_instagram", false));
+        checkYouTube.setChecked(prefs.getBoolean("block_youtube", false));
 
         btnGrantPermission.setOnClickListener(v -> {
             // Open accessibility settings
@@ -46,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
         checkInstagram.setOnCheckedChangeListener((buttonView, isChecked) -> {
             prefs.edit().putBoolean("block_instagram", isChecked).apply();
             Toast.makeText(this, isChecked ? "Instagram lock activated" : "Instagram lock is off", Toast.LENGTH_SHORT).show();
+        });
+
+        checkYouTube.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.edit().putBoolean("block_youtube", isChecked).apply();
+            Toast.makeText(this, isChecked ? "YouTube lock activated" : "YouTube lock is off", Toast.LENGTH_SHORT).show();
         });
     }
 
