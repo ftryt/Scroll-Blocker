@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGrantPermission;
     private CheckBox checkInstagram;
     private CheckBox checkYouTube;
+
+    private CheckBox checkTikTok;
     private SharedPreferences prefs;
 
     @Override
@@ -36,9 +38,11 @@ public class MainActivity extends AppCompatActivity {
         btnGrantPermission = findViewById(R.id.btnGrantPermission);
         checkInstagram = findViewById(R.id.checkInstagram);
         checkYouTube = findViewById(R.id.checkYouTube);
+        checkTikTok = findViewById(R.id.checkTikTok);
 
-        checkInstagram.setChecked(prefs.getBoolean("block_instagram", false));
-        checkYouTube.setChecked(prefs.getBoolean("block_youtube", false));
+        checkInstagram.setChecked(prefs.getBoolean("com.instagram.android", false));
+        checkYouTube.setChecked(prefs.getBoolean("com.google.android.youtube", false));
+        checkTikTok.setChecked(prefs.getBoolean("com.zhiliaoapp.musically", false));
 
         btnGrantPermission.setOnClickListener(v -> {
             // Open accessibility settings
@@ -47,13 +51,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         checkInstagram.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            prefs.edit().putBoolean("block_instagram", isChecked).apply();
+            prefs.edit().putBoolean("com.instagram.android", isChecked).apply();
             Toast.makeText(this, isChecked ? "Instagram lock activated" : "Instagram lock is off", Toast.LENGTH_SHORT).show();
         });
 
         checkYouTube.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            prefs.edit().putBoolean("block_youtube", isChecked).apply();
+            prefs.edit().putBoolean("com.google.android.youtube", isChecked).apply();
             Toast.makeText(this, isChecked ? "YouTube lock activated" : "YouTube lock is off", Toast.LENGTH_SHORT).show();
+        });
+
+        checkTikTok.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.edit().putBoolean("com.zhiliaoapp.musically", isChecked).apply();
+            Toast.makeText(this, isChecked ? "TikTok lock activated" : "TikTok lock is off", Toast.LENGTH_SHORT).show();
         });
     }
 

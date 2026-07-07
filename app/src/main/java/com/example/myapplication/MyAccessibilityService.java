@@ -7,6 +7,7 @@ import android.view.accessibility.AccessibilityEvent;
 
 import com.example.myapplication.strategies.BlockerStrategy;
 import com.example.myapplication.strategies.InstagramStrategy;
+import com.example.myapplication.strategies.TikTokStrategy;
 import com.example.myapplication.strategies.YouTubeStrategy;
 
 import java.util.HashMap;
@@ -28,6 +29,7 @@ public class MyAccessibilityService extends AccessibilityService {
         // Registering strategies
         strategies.put("com.instagram.android", new InstagramStrategy());
         strategies.put("com.google.android.youtube", new YouTubeStrategy());
+        strategies.put("com.zhiliaoapp.musically", new TikTokStrategy());
 
         Log.d("Blocker", "Service Connected");
     }
@@ -36,11 +38,15 @@ public class MyAccessibilityService extends AccessibilityService {
     public void onAccessibilityEvent(AccessibilityEvent event) {
         String packageName = event.getPackageName() != null ? event.getPackageName().toString() : "";
 
+        // Log.d("Blocker", "Package name: " + packageName);
+
         SharedPreferences prefs = getSharedPreferences("BlockerPrefs", MODE_PRIVATE);
 
-        // Instagram
-        if (packageName.equals("com.instagram.android")) {
-            boolean isEnabled = prefs.getBoolean("block_instagram", false);
+        if (strategies.containsKey(packageName)){
+            boolean isEnabled = prefs.getBoolean(packageName, false);
+
+            // Log.d("Blocker", "Strategy found: " + packageName + " boolean position: " + isEnabled);
+
             if (isEnabled) {
                 BlockerStrategy strategy = strategies.get(packageName);
                 if (strategy != null) {
@@ -48,19 +54,6 @@ public class MyAccessibilityService extends AccessibilityService {
                 }
             }
         }
-
-        // YouTube
-        if (packageName.equals("com.google.android.youtube")) {
-            boolean isEnabled = prefs.getBoolean("block_youtube", false);
-            if (isEnabled) {
-                BlockerStrategy strategy = strategies.get(packageName);
-                if (strategy != null) {
-                    strategy.execute(event, this);
-                }
-            }
-        }
-
-        // TikTok
     }
 
     @Override
